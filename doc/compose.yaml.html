@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>compose.yaml</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="doc-style.css" />
+  <script src="doc-filelist.js"></script>
+  <script>
+    var relativeDir = "";
+    var thisFile = "compose.yaml";
+    var defaultSidebar = true;
+  </script>
+  <script src="doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>compose.yaml</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+<p>Comments are provided throughout this file to help you get started.
+If you need more help, visit the Docker compose reference guide at
+https://docs.docker.com/compose/compose-file/</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="yaml">
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<p>Here the instructions define your application as two services called &quot;todo-app&quot; and “todo-database”
+The service “todo-app” is built from the Dockerfile in the /app directory,
+and the service “todo-database” uses the official MongoDB image
+from Docker Hub - https://hub.docker.com/_/mongo.
+You can add other services your application may depend on here.</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="yaml">
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">todo-app:</span>
+    <span class="hljs-attr">build:</span>
+      <span class="hljs-attr">context:</span> <span class="hljs-string">./app</span>
+    <span class="hljs-attr">depends_on:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">todo-database</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-attr">NODE_ENV:</span> <span class="hljs-string">production</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">3000</span><span class="hljs-string">:3000</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">35729</span><span class="hljs-string">:35729</span>
+    <span class="hljs-attr">develop:</span>
+      <span class="hljs-attr">watch:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-attr">path:</span> <span class="hljs-string">./app/package.json</span>
+          <span class="hljs-attr">action:</span> <span class="hljs-string">rebuild</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-attr">path:</span> <span class="hljs-string">./app</span>
+          <span class="hljs-attr">target:</span> <span class="hljs-string">/usr/src/app</span>
+          <span class="hljs-attr">action:</span> <span class="hljs-string">sync</span>
+
+  <span class="hljs-attr">todo-database:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">mongo:6</span>
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>volumes:</p>
+<ul>
+<li>database:/data/db</li>
+</ul>
+
+        </td>
+        <td class="code highlight">
+          <pre class="yaml">    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-number">27017</span><span class="hljs-string">:27017</span>
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>volumes:
+database:</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="yaml"></pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>

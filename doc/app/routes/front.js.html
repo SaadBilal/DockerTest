@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>front.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../";
+    var thisFile = "app\\routes\\front.js";
+    var defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container">
+    <div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+    
+      <tr>
+        <td class="docs">
+          <h1>front.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+    
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1"></a>
+</div>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript"><span class="hljs-keyword">const</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+<span class="hljs-keyword">const</span> Todo = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./../models/Todo'</span>);
+
+<span class="hljs-keyword">const</span> router = express.Router();
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2"></a>
+</div>
+<p>Home page route</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">router.get(<span class="hljs-string">'/'</span>, <span class="hljs-keyword">async</span> (req, res) =&gt; {
+
+    <span class="hljs-keyword">const</span> todos = <span class="hljs-keyword">await</span> Todo.find()
+    res.render(<span class="hljs-string">"todos"</span>, {
+        <span class="hljs-attr">tasks</span>: (<span class="hljs-built_in">Object</span>.keys(todos).length &gt; <span class="hljs-number">0</span> ? todos : {})
+    });
+});
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3"></a>
+</div>
+<p>POST - Submit Task</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">router.post(<span class="hljs-string">'/'</span>, (req, res) =&gt; {
+    <span class="hljs-keyword">const</span> newTask = <span class="hljs-keyword">new</span> Todo({
+        <span class="hljs-attr">task</span>: req.body.task
+    });
+
+    newTask.save()
+    .then(<span class="hljs-function"><span class="hljs-params">task</span> =&gt;</span> res.redirect(<span class="hljs-string">'/'</span>))
+    .catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(err));
+});
+
+</pre>
+        </td>
+      </tr>
+    
+      <tr>
+        <td class="docs">
+          <div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4"></a>
+</div>
+<p>POST - Destroy todo item</p>
+
+        </td>
+        <td class="code highlight">
+          <pre class="javascript">router.post(<span class="hljs-string">'/todo/destroy'</span>, <span class="hljs-keyword">async</span> (req, res) =&gt; {
+    <span class="hljs-keyword">const</span> taskKey = req.body._key;
+    <span class="hljs-keyword">const</span> err = <span class="hljs-keyword">await</span> Todo.findOneAndRemove({<span class="hljs-attr">_id</span>: taskKey})
+    res.redirect(<span class="hljs-string">'/'</span>);
+});
+
+
+<span class="hljs-built_in">module</span>.exports = router;
+</pre>
+        </td>
+      </tr>
+    
+  </tbody>
+</table>
+
+  </div>
+</body>
+</html>
